@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Management | PoultryTech</title>
+    <link rel="stylesheet" href="water-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2><i class="fa-solid fa-kiwi-bird"></i> PoultryTech</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="environment.html"><i class="fa-solid fa-temperature-half"></i> Environment</a></li>
+                <li><a href="feeding.html"><i class="fa-solid fa-wheat-awn"></i> Feeding System</a></li>
+                <li class="active"><a href="water.html"><i class="fa-solid fa-droplet"></i> Water Flow</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <div>
+                    <h1>Water Flow & Hydration</h1>
+                    <p>YF-S201 Telemetry & Nipple Drinker Line Control</p>
+                </div>
+                <div class="header-actions">
+                    <span class="status online">Valves Active</span>
+                </div>
+            </header>
+
+            <section class="sensor-grid">
+                <div class="sensor-card">
+                    <div class="icon-wrapper flow"><i class="fa-solid fa-water"></i></div>
+                    <div class="data">
+                        <h3>Current Flow Rate</h3>
+                        <h2 id="flow-rate">1.2 L/min</h2>
+                        <span class="badge good">Normal</span>
+                    </div>
+                </div>
+
+                <div class="sensor-card">
+                    <div class="icon-wrapper consumption"><i class="fa-solid fa-glass-water"></i></div>
+                    <div class="data">
+                        <h3>Daily Consumption</h3>
+                        <h2>114 Liters</h2>
+                        <span class="badge neutral">On Target</span>
+                    </div>
+                </div>
+
+                <div class="sensor-card">
+                    <div class="icon-wrapper pressure"><i class="fa-solid fa-gauge-high"></i></div>
+                    <div class="data">
+                        <h3>Line Pressure</h3>
+                        <h2>20 cm wc</h2>
+                        <span class="badge good">Optimal</span>
+                    </div>
+                </div>
+
+                <div class="sensor-card">
+                    <div class="icon-wrapper temp-water"><i class="fa-solid fa-temperature-arrow-down"></i></div>
+                    <div class="data">
+                        <h3>Water Temp</h3>
+                        <h2 id="water-temp">22 °C</h2>
+                        <span class="badge warning">Approaching 25°C</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="middle-grid">
+                <div class="panel chart-panel">
+                    <h2>Hourly Water Consumption (Liters)</h2>
+                    <canvas id="waterChart"></canvas>
+                </div>
+
+                <div class="panel control-panel">
+                    <div class="control-header">
+                        <h2>Valve Control</h2>
+                        <div class="mode-toggle">
+                            <span>Main Supply</span>
+                            <label class="switch"><input type="checkbox" id="main-valve-toggle" checked><span class="slider round"></span></label>
+                        </div>
+                    </div>
+
+                    <div class="status-box">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <p>Line flushing clears warm/stagnant water to prevent biofilm buildup. Recommended 3x daily if temps exceed 25°C.</p>
+                    </div>
+
+                    <hr class="divider">
+
+                    <h2><i class="fa-solid fa-shower"></i> Line Flushing Protocol</h2>
+                    
+                    <div class="flush-controls">
+                        <div class="toggle-row">
+                            <span>Auto-Flush (Temp > 25°C)</span>
+                            <label class="switch"><input type="checkbox" id="auto-flush-toggle" checked><span class="slider round"></span></label>
+                        </div>
+                        
+                        <button id="btn-manual-flush" class="btn-primary">
+                            <i class="fa-solid fa-arrows-rotate"></i> Initiate Manual Flush
+                        </button>
+                    </div>
+
+                    <ul class="activity-list" id="flush-log" style="margin-top: 20px;">
+                        <li><i class="fa-solid fa-check-circle" style="color:var(--success);"></i> Scheduled flush completed <span>06:00 AM</span></li>
+                        <li><i class="fa-solid fa-check-circle" style="color:var(--success);"></i> Scheduled flush completed <span>12:00 PM</span></li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="water-script.js"></script>
+</body>
+</html>

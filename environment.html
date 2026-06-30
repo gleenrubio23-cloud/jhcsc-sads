@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coop Environment | PoultryTech</title>
+    <link rel="stylesheet" href="env-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2><i class="fa-solid fa-kiwi-bird"></i> PoultryTech</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+                <li class="active"><a href="environment.html"><i class="fa-solid fa-temperature-half"></i> Environment</a></li>
+                <li><a href="feeding.html"><i class="fa-solid fa-wheat-awn"></i> Feeding System</a></li>
+                <li><a href="water.html"><i class="fa-solid fa-droplet"></i> Water Flow</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <div>
+                    <h1>Environmental Climate Control</h1>
+                    <p>DHT11 & MQ135 Sensor Telemetry via ESP32</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-refresh" onclick="location.reload()"><i class="fa-solid fa-rotate-right"></i> Refresh Data</button>
+                    <span class="status online">Sensors Active</span>
+                </div>
+            </header>
+
+            <section class="sensor-grid">
+                <div class="sensor-card">
+                    <div class="icon-wrapper temp"><i class="fa-solid fa-thermometer"></i></div>
+                    <div class="data">
+                        <h3>Temperature</h3>
+                        <h2 id="temp-val">28.5 °C</h2>
+                        <span class="badge good">Optimal</span>
+                    </div>
+                </div>
+                <div class="sensor-card">
+                    <div class="icon-wrapper hum"><i class="fa-solid fa-droplet"></i></div>
+                    <div class="data">
+                        <h3>Humidity</h3>
+                        <h2 id="hum-val">65 %</h2>
+                        <span class="badge good">Optimal</span>
+                    </div>
+                </div>
+                <div class="sensor-card">
+                    <div class="icon-wrapper nh3"><i class="fa-solid fa-wind"></i></div>
+                    <div class="data">
+                        <h3>Ammonia (NH3)</h3>
+                        <h2 id="nh3-val">12 ppm</h2>
+                        <span class="badge good">Safe</span>
+                    </div>
+                </div>
+                <div class="sensor-card">
+                    <div class="icon-wrapper light"><i class="fa-solid fa-sun"></i></div>
+                    <div class="data">
+                        <h3>Light Level</h3>
+                        <h2 id="lux-val">850 Lux</h2>
+                        <span class="badge warning">Dim</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="middle-grid">
+                <div class="panel chart-panel">
+                    <h2>24-Hour Climate Trend</h2>
+                    <canvas id="climateChart"></canvas>
+                </div>
+
+                <div class="panel control-panel">
+                    <h2>Actuator Overrides</h2>
+                    <p class="subtitle">Manual control disables fuzzy logic automation for 1 hour.</p>
+                    
+                    <div class="actuator-list">
+                        <div class="actuator-item">
+                            <div class="act-info">
+                                <i class="fa-solid fa-fan"></i>
+                                <div>
+                                    <h4>Exhaust Fan</h4>
+                                    <small>Relay PIN 12</small>
+                                </div>
+                            </div>
+                            <label class="switch"><input type="checkbox" id="fan-toggle"><span class="slider round"></span></label>
+                        </div>
+
+                        <div class="actuator-item">
+                            <div class="act-info">
+                                <i class="fa-solid fa-fire-burner" style="color:#e74c3c;"></i>
+                                <div>
+                                    <h4>Heating Lamp</h4>
+                                    <small>Relay PIN 13</small>
+                                </div>
+                            </div>
+                            <label class="switch"><input type="checkbox" id="heat-toggle" checked><span class="slider round"></span></label>
+                        </div>
+
+                        <div class="actuator-item">
+                            <div class="act-info">
+                                <i class="fa-regular fa-lightbulb" style="color:#f1c40f;"></i>
+                                <div>
+                                    <h4>Coop Lighting</h4>
+                                    <small>Relay PIN 14</small>
+                                </div>
+                            </div>
+                            <label class="switch"><input type="checkbox" id="light-toggle"><span class="slider round"></span></label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="env-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feeding System | PoultryTech</title>
+    <link rel="stylesheet" href="feed-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2><i class="fa-solid fa-kiwi-bird"></i> PoultryTech</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="environment.html"><i class="fa-solid fa-temperature-half"></i> Environment</a></li>
+                <li class="active"><a href="feeding.html"><i class="fa-solid fa-wheat-awn"></i> Feeding System</a></li>
+                <li><a href="#"><i class="fa-solid fa-droplet"></i> Water Flow</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <div>
+                    <h1>Automated Feeding Control</h1>
+                    <p>Hopper Weight & Conveyor Motor Management</p>
+                </div>
+                <div class="header-actions">
+                    <span class="status online">Scale Calibrated</span>
+                </div>
+            </header>
+
+            <section class="sensor-grid">
+                <div class="sensor-card hopper-card">
+                    <div class="hopper-visual">
+                        <div class="hopper-fill" id="hopper-fill" style="height: 65%;"></div>
+                    </div>
+                    <div class="data">
+                        <h3>Main Silo Level</h3>
+                        <h2 id="weight-val">32.5 kg</h2>
+                        <span class="badge good">65% Capacity</span>
+                    </div>
+                </div>
+
+                <div class="sensor-card">
+                    <div class="icon-wrapper feed"><i class="fa-solid fa-bowl-rice"></i></div>
+                    <div class="data">
+                        <h3>Distributed Today</h3>
+                        <h2>4.2 kg</h2>
+                        <span class="badge neutral">On Target</span>
+                    </div>
+                </div>
+
+                <div class="sensor-card">
+                    <div class="icon-wrapper motor"><i class="fa-solid fa-gear"></i></div>
+                    <div class="data">
+                        <h3>Auger Motor</h3>
+                        <h2 id="motor-status">IDLE</h2>
+                        <span class="badge good">Ready</span>
+                    </div>
+                </div>
+
+                <div class="sensor-card">
+                    <div class="icon-wrapper clock"><i class="fa-solid fa-clock"></i></div>
+                    <div class="data">
+                        <h3>Next Scheduled</h3>
+                        <h2>14:30</h2>
+                        <span class="badge warning">In 2 hours</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="middle-grid">
+                <div class="panel chart-panel">
+                    <h2>Weekly Feed Consumption (kg)</h2>
+                    <canvas id="feedChart"></canvas>
+                </div>
+
+                <div class="panel control-panel">
+                    <div class="control-header">
+                        <h2>Dispenser Control</h2>
+                        <div class="mode-toggle">
+                            <span>Manual</span>
+                            <label class="switch"><input type="checkbox" id="auto-toggle" checked><span class="slider round"></span></label>
+                            <span>Auto</span>
+                        </div>
+                    </div>
+                    
+                    <div class="manual-action" id="manual-controls" style="opacity: 0.5; pointer-events: none;">
+                        <input type="number" id="manual-amount" placeholder="Amount (kg)" min="0.1" step="0.1">
+                        <button id="btn-dispense" class="btn-primary"><i class="fa-solid fa-play"></i> Dispense Now</button>
+                    </div>
+
+                    <hr class="divider">
+
+                    <h2><i class="fa-solid fa-calendar-days"></i> Feeding Schedule (RTC)</h2>
+                    <div class="schedule-add">
+                        <input type="time" id="sched-time">
+                        <input type="number" id="sched-amount" placeholder="kg" style="width: 70px;" min="0.1" step="0.1">
+                        <button id="btn-add-sched" class="btn-secondary">Add</button>
+                    </div>
+
+                    <ul class="schedule-list" id="schedule-list">
+                        <li>
+                            <div class="sched-info"><strong>06:00 AM</strong> - 2.5 kg</div>
+                            <button class="btn-delete"><i class="fa-solid fa-trash"></i></button>
+                        </li>
+                        <li>
+                            <div class="sched-info"><strong>14:30 PM</strong> - 1.5 kg</div>
+                            <button class="btn-delete"><i class="fa-solid fa-trash"></i></button>
+                        </li>
+                        <li>
+                            <div class="sched-info"><strong>18:00 PM</strong> - 2.0 kg</div>
+                            <button class="btn-delete"><i class="fa-solid fa-trash"></i></button>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="feed-script.js"></script>
+</body>
+</html>
