@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Settings | PoultryTech</title>
+    <link rel="stylesheet" href="settings-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2><i class="fa-solid fa-kiwi-bird"></i> PoultryTech</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="environment.html"><i class="fa-solid fa-temperature-half"></i> Environment</a></li>
+                <li><a href="feeding.html"><i class="fa-solid fa-wheat-awn"></i> Feeding System</a></li>
+                <li><a href="water.html"><i class="fa-solid fa-droplet"></i> Water Flow</a></li>
+                <li class="active"><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <div>
+                    <h1>System Configuration</h1>
+                    <p>ESP32 Node Management & Calibration</p>
+                </div>
+                <div class="header-actions">
+                    <span class="status warning" id="save-status">Unsaved Changes</span>
+                </div>
+            </header>
+
+            <div class="settings-grid">
+                
+                <div class="panel">
+                    <h2><i class="fa-solid fa-wifi"></i> Network & MQTT Broker</h2>
+                    <hr class="divider">
+                    <form id="network-form" class="settings-form">
+                        <div class="form-group">
+                            <label>Wi-Fi SSID</label>
+                            <input type="text" value="Farm_Network_2G">
+                        </div>
+                        <div class="form-group">
+                            <label>Wi-Fi Password</label>
+                            <div class="password-wrapper">
+                                <input type="password" value="securepassword123" id="wifi-pass">
+                                <i class="fa-solid fa-eye toggle-pass" onclick="togglePassword('wifi-pass')"></i>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>MQTT Broker IP (Raspberry Pi)</label>
+                            <input type="text" value="192.168.1.100">
+                        </div>
+                        <div class="form-group">
+                            <label>MQTT Port</label>
+                            <input type="number" value="1883">
+                        </div>
+                        <button type="submit" class="btn-primary">Save Network Details</button>
+                    </form>
+                </div>
+
+                <div class="panel">
+                    <h2><i class="fa-solid fa-scale-balanced"></i> Sensor Calibration</h2>
+                    <hr class="divider">
+                    <form id="calibration-form" class="settings-form">
+                        <div class="status-box info">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <p>Adjust these values carefully. Incorrect calibration will result in faulty Fuzzy Logic execution.</p>
+                        </div>
+                        <div class="form-group">
+                            <label>HX711 Scale Factor (Feed Silo)</label>
+                            <input type="number" step="0.01" value="-215.50">
+                            <small>Use known weight to calculate: (Raw Reading / Known Weight)</small>
+                        </div>
+                        <div class="form-group">
+                            <label>YF-S201 Pulse Factor (Water Flow)</label>
+                            <input type="number" step="0.1" value="7.5">
+                            <small>Standard is 7.5 pulses per second for 1 L/min.</small>
+                        </div>
+                        <div class="form-group">
+                            <label>DHT22 Temp Offset (°C)</label>
+                            <input type="number" step="0.1" value="-0.5">
+                        </div>
+                        <button type="submit" class="btn-primary">Apply Calibration</button>
+                    </form>
+                </div>
+
+                <div class="panel">
+                    <h2><i class="fa-solid fa-bell"></i> Notification Preferences</h2>
+                    <hr class="divider">
+                    <form id="alerts-form" class="settings-form">
+                        <div class="form-group">
+                            <label>Admin Email (For Critical Alerts)</label>
+                            <input type="email" value="admin@poultrytech.com">
+                        </div>
+                        <div class="toggle-group">
+                            <span>Ammonia (NH3) Warning Emails</span>
+                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                        </div>
+                        <div class="toggle-group">
+                            <span>Silo Low Feed Alerts (< 10%)</span>
+                            <label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+                        </div>
+                        <div class="toggle-group">
+                            <span>Daily Daily Summary Reports</span>
+                            <label class="switch"><input type="checkbox"><span class="slider round"></span></label>
+                        </div>
+                        <button type="submit" class="btn-primary" style="margin-top: 15px;">Update Preferences</button>
+                    </form>
+                </div>
+
+                <div class="panel danger-zone">
+                    <h2><i class="fa-solid fa-screwdriver-wrench"></i> System Maintenance</h2>
+                    <hr class="divider">
+                    <ul class="sys-info">
+                        <li><strong>Firmware Version:</strong> v2.1.4 (Stable)</li>
+                        <li><strong>System Uptime:</strong> 14 Days, 6 Hrs</li>
+                        <li><strong>Memory Usage:</strong> 42% of SPIFFS</li>
+                    </ul>
+                    <div class="action-buttons">
+                        <button class="btn-secondary"><i class="fa-solid fa-cloud-arrow-down"></i> OTA Update</button>
+                        <button class="btn-danger" id="btn-reboot"><i class="fa-solid fa-power-off"></i> Reboot ESP32</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="settings-script.js"></script>
+</body>
+</html>
